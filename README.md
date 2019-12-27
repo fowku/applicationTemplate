@@ -1,6 +1,6 @@
 # Application template 🥺
 
-This is configured application template, which uses React, Webpack, Babel, Sass and MobX
+This is configured application template, which uses React, Webpack, Babel, Sass, MobX and TypeScript
 
 ## Available Scripts
 
