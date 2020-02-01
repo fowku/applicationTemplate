@@ -1,6 +1,7 @@
 # Application template 🥺
 
-This is configured application template, which uses React, Webpack, Babel, Sass, MobX and TypeScript
+This is configured application template, which uses React, Webpack, Babel, Sass, MobX 4, TypeScript, Prettier and ESLint.
+Works on IE 11
 
 ## Available Scripts
 
