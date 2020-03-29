@@ -1,11 +1,13 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: ['core-js', './src/index.tsx'],
 
   devServer: {
     contentBase: './dist',
+    host: '0.0.0.0',
     port: '3000',
   },
 
@@ -22,42 +24,31 @@ module.exports = {
     rules: [
       {
         test: /\.(ts|tsx)$/,
-        enforce: 'pre',
-        use: [
-          {
-            options: {
-              eslintPath: require.resolve('eslint'),
-            },
-            loader: require.resolve('eslint-loader'),
-          },
-        ],
+        use: ['babel-loader', 'eslint-loader'],
         exclude: /node_modules/,
-      },
-
-      {
-        test: /\.(ts|tsx)$/,
-        use: {
-          loader: 'babel-loader',
-        },
       },
 
       {
         test: /\.scss/,
         use: ['style-loader', 'css-loader', 'sass-loader'],
+        exclude: /node_modules/,
       },
 
       {
         test: /\.(png|jpe?g|gif|svg)$/i,
-        use: {
-          loader: 'file-loader',
-        },
+        use: ['file-loader'],
+        exclude: /node_modules/,
       },
     ],
   },
 
   plugins: [
+    new webpack.ProvidePlugin({
+      fetch: 'exports-loader?self.fetch!whatwg-fetch/dist/fetch.umd',
+    }),
     new HtmlWebpackPlugin({
       template: './public/index.html',
+      favicon: './src/favicon.ico',
     }),
   ],
 };
